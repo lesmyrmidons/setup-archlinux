@@ -1,0 +1,295 @@
+- hosts: localhost
+  connection: local
+  gather_facts: 'True'
+
+  vars:
+    local_home: "{{ lookup('env','HOME') }}"
+
+    repos_git_user:
+      - { src: "https://github.com/lesmyrmidons/dotfiles.git", dest: "~/.setup/dotfile" }
+      - { src: "https://github.com/lesmyrmidons/zsh-config.git", dest: "~/.setup/zsh_config" }
+      # - { src: "https://github.com/lesmyrmidons/vim-config.git", dest: "~/.setup/vim_config" }
+
+    repos_git_root:
+      - { src: "https://github.com/ahmetb/kubectx", dest: "/opt/kubectx"}
+
+    aur_packages:
+      - { name: antibody, src: https://aur.archlinux.org/antibody.git, dest: ~/.setup/aur/antibody }
+      - { name: cnijfilter2-mg7700, src: https://aur.archlinux.org/cnijfilter2-mg7700.git, dest: ~/.setup/aur/cnijfilter2-mg7700 }
+      - { name: dive, src: https://aur.archlinux.org/dive.git, dest: ~/.setup/aur/dive }
+      - { name: google-chrome, src: https://aur.archlinux.org/google-chrome.git, dest: ~/.setup/aur/google-chrome }
+      - { name: google-cloud-sdk, src: https://aur.archlinux.org/google-cloud-sdk.git, dest: ~/.setup/aur/google-cloud-sdk }
+      - { name: gotask-taskfile, src: https://aur.archlinux.org/gotask-taskfile.git, dest: ~/.setup/aur/gotask-taskfile }
+      - { name: lens, src: https://aur.archlinux.org/lens.git, dest: ~/.setup/aur/lens }
+      - { name: jetbrains-toolbox, src: https://aur.archlinux.org/jetbrains-toolbox.git, dest: ~/.setup/aur/jetbrains-toolbox }
+      - { name: scangearmp2-mg7700, src: https://aur.archlinux.org/scangearmp2-mg7700.git, dest: ~/.setup/aur/scangearmp2-mg7700 }
+      - { name: slack-desktop, src: https://aur.archlinux.org/slack-desktop.git, dest: ~/.setup/aur/slack-desktop }
+      - { name: teams, src: https://aur.archlinux.org/teams.git, dest: ~/.setup/aur/teams }
+      - { name: virtualbox-ext-oracle, src: https://aur.archlinux.org/virtualbox-ext-oracle.git, dest: ~/.setup/aur/virtualbox-ext-oracle}
+
+    pacman_packages:
+      - { name: ack }
+      - { name: antiword }
+      - { name: bash-completion }
+      - { name: caprine }
+      - { name: code }
+      - { name: chrome-gnome-shell }
+      - { name: curl }
+      - { name: docker }
+      - { name: fuse }
+      - { name: git }
+      - { name: hddtemp }
+      - { name: helm }
+      - { name: htop }
+      - { name: httpie }
+      - { name: hardinfo }
+      - { name: i2c-tools }
+      - { name: krita }
+      - { name: krita-plugin-gmic }
+      - { name: kubectl }
+      - { name: kubectx }
+      - { name: nvm }
+      - { name: nvme-cli }
+      - { name: obs-studio }
+      - { name: pinta }
+      - { name: pwgen }
+      - { name: screenfetch }
+      - { name: signal-desktop }
+      - { name: slack-web-jak, state: absent }
+      - { name: solaar }
+      - { name: steam-manjaro }
+      - { name: terminator }
+      - { name: tig }
+      - { name: timeshift }
+      - { name: timew } # timewarrior
+      - { name: tmux }
+      - { name: tree }
+      - { name: ulauncher }
+      - { name: vagrant }
+      - { name: vim }
+      - { name: virtualbox }
+      - { name: virtualbox-guest-iso }
+      - { name: virtualbox-host-dkms }
+      - { name: linux510-virtualbox-host-modules }
+      - { name: whatsapp-web-jak }
+      - { name: yarn }
+      - { name: zsh }
+      - { name: bitwarden }
+      - { name: brave }
+      - { name: discord }
+      - { name: ledger-live-bin }
+      - { name: vlc }
+
+    # flatpak_packages:
+    #   # monitoring Nvidia
+    #   - { name: com.leinardi.gwe, state: absent }
+    #   - { name: com.googleplaymusicdesktopplayer.GPMDP, state: absent }
+    #   - { name: org.gtk.Gtk3theme.Yaru-remix, state: absent }
+    #   - { name: org.gtk.Gtk3theme.Yaru-remix-dark, state: absent }
+    #   - { name: org.gtk.Gtk3theme.Yaru-remix-light, state: absent }
+    #   - { name: com.discordapp.Discord }
+
+    pip_packages:
+      - { name: thefuck }
+      # Pygments for zsh-syntax-highlighting
+      - { name: Pygments }
+
+    composer_packages:
+      - { name: "hirak/prestissimo" }
+      - { name: "psy/psysh" }
+
+    npm_packages:
+      - { name: "@angular/cli" }
+      - { name: bower }
+      - { name: coffee-script }
+      - { name: hubot }
+      - { name: karma }
+      - { name: "@vue/cli" }
+      - { name: localtunnel }
+      - { name: n }
+      - { name: nativefier }
+      - { name: npm-check-updates }
+      - { name: typescript }
+      - { name: typings }
+
+    fonts_url:
+      - { url: https://github.com/romkatv/dotfiles-public/raw/master/.local/share/fonts/NerdFonts/MesloLGS%20NF%20Regular.ttf }
+      - { url: https://github.com/romkatv/dotfiles-public/raw/master/.local/share/fonts/NerdFonts/MesloLGS%20NF%20Bold.ttf }
+      - { url: https://github.com/romkatv/dotfiles-public/raw/master/.local/share/fonts/NerdFonts/MesloLGS%20NF%20Italic.ttf }
+      - { url: https://github.com/romkatv/dotfiles-public/raw/master/.local/share/fonts/NerdFonts/MesloLGS%20NF%20Bold%20Italic.ttf }
+
+    link_user:
+      - { src: ~/.setup/dotfile/gitconfig, dest: ~/.gitconfig }
+      - { src: ~/.setup/dotfile/gitignore_global, dest: ~/.gitignore_global }
+      - { src: ~/.setup/dotfile/_ansible.cfg, dest: ~/.ansible.cfg }
+      - { src: ~/.setup/dotfile/_config/terminator, dest: ~/.config/terminator }
+      - { src: ~/.setup/zsh_config/zshrc, dest: ~/.zshrc }
+      - { src: ~/.setup/zsh_config/zsh_aliases, dest: ~/.zsh_aliases }
+      - { src: ~/.setup/zsh_config/zsh_plugins.txt, dest: ~/.zsh_plugins.txt }
+      - { src: /opt/kubectx/completion/kubectx.zsh, dest: /home/lesmyrmidons/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh/completions/_kubectx.zsh }
+      - { src: /opt/kubectx/completion/kubens.zsh, dest: /home/lesmyrmidons/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh/completions/_kubens.zsh }
+
+    directories:
+      - { src: "{{ local_home }}/.fonts" }
+      - { src: "{{ local_home }}/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh/completions" }
+      - { src: "{{ local_home }}/.kube" }
+
+  handlers:
+    - name: run fc-cache
+      shell: fc-cache -vf
+    - name: sensors
+      become: 'True'
+      shell: sensors-detect --auto
+
+  tasks:
+    - name: Update repositories ArchLinux
+      become: 'True'
+      community.general.pacman:
+        update_cache: 'True'
+        upgrade: 'True'
+      tags:
+        - pacman
+        - dotfile
+
+    - name: Install packages ArchLinux
+      become: 'True'
+      package:
+        name: "{{ item.name }}"
+        state: "{{ item.state|default('present') }}"
+      with_items: "{{ pacman_packages }}"
+      ignore_errors: 'True'
+      notify: sensors
+      tags:
+        - pacman
+        - dotfile
+
+    - name: Download package AUR
+      git:
+        repo: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        force: 'True'
+        update: 'True'
+        recursive: 'False'
+        track_submodules: 'False'
+      with_items: "{{ aur_packages }}"
+      tags:
+        - aur
+        - dotfile
+    
+    - name: Build packages AUR
+      shell: |
+        cd {{ local_home }}/.setup/aur/{{ item.name }}
+        makepkg -sic --needed --noconfirm
+      with_items: "{{ aur_packages }}"
+      tags:
+        - aur
+        - dotfile
+
+    - name: Remove packages list
+      file:
+        path: "{{ local_home }}/.setup/aur"
+        state: absent
+      tags:
+        - aur
+        - dotfile
+
+    # configure zsh
+    - name: Change default shell for {{ lookup('env','USER') }}
+      become: 'True'
+      user:
+        name: "{{ lookup('env','USER') }}"
+        shell: /bin/zsh
+        groups: "{{ lookup('env','USER') }}"
+        append: 'True'
+      tags:
+        - zsh
+        - dotfile
+
+    - name: Install kubeseal
+      become: 'True'
+      get_url:
+        url: https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.16.0/kubeseal-linux-amd64
+        dest: /usr/local/bin/kubeseal
+        mode: '0755'
+        owner: root
+        group: root
+      tags:
+        - k8s
+        - dotfile
+
+    # install repositories github
+    - name: git clone all repositories user
+      git:
+        repo: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        force: 'True'
+        update: 'True'
+        recursive: 'False'
+        track_submodules: 'False'
+      with_items: "{{ repos_git_user }}"
+      tags:
+        - zsh
+        - dotfile
+
+    - name: git clone all repositories root
+      become: 'True'
+      git:
+        repo: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        force: 'True'
+      with_items: "{{ repos_git_root }}"
+      tags:
+        - k8s
+        - dotfile
+
+    - name: Install apps Python
+      pip:
+        name: "{{ item.name }}"
+        state: "{{ item.state|default('present') }}"
+      with_items: "{{ pip_packages }}"
+      tags:
+        - zsh
+        - dotfile
+
+    - name: Create Symlink for git
+      file:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        force: 'True'
+        state: link
+      with_items: "{{ link_user }}"
+      tags:
+        - zsh
+        - dotfile
+
+    - name: load antibody
+      shell: antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.sh
+      when: running_processes_ab.changed
+      tags:
+        - zsh
+        - dotfile
+
+    # Create folder for fonts
+    - name: Create folder for fonts
+      file:
+        path: "{{ item.src }}"
+        state: directory
+        mode: '0755'
+        owner: "{{ lookup('env','USER') }}"
+        group: "{{ lookup('env','USER') }}"
+      with_items: "{{ directories }}"
+      tags:
+        - zsh
+        - dotfile
+
+    # Download fonts
+    - name: Download fonts
+      get_url:
+        url: "{{ item.url }}"
+        dest: "{{ local_home }}/.fonts/"
+        mode: '0644'
+      with_items: "{{ fonts_url }}"
+      notify: run fc-cache
+      tags:
+        - zsh
+        - dotfile
