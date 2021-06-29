@@ -20,8 +20,8 @@
       - { name: google-chrome, src: https://aur.archlinux.org/google-chrome.git, dest: ~/.setup/aur/google-chrome }
       - { name: google-cloud-sdk, src: https://aur.archlinux.org/google-cloud-sdk.git, dest: ~/.setup/aur/google-cloud-sdk }
       - { name: gotask-taskfile, src: https://aur.archlinux.org/gotask-taskfile.git, dest: ~/.setup/aur/gotask-taskfile }
-      - { name: lens, src: https://aur.archlinux.org/lens.git, dest: ~/.setup/aur/lens }
       - { name: jetbrains-toolbox, src: https://aur.archlinux.org/jetbrains-toolbox.git, dest: ~/.setup/aur/jetbrains-toolbox }
+      - { name: joplin, src: https://aur.archlinux.org/joplin.git, dest: ~/.setup/aur/joplin }
       - { name: scangearmp2-mg7700, src: https://aur.archlinux.org/scangearmp2-mg7700.git, dest: ~/.setup/aur/scangearmp2-mg7700 }
       - { name: slack-desktop, src: https://aur.archlinux.org/slack-desktop.git, dest: ~/.setup/aur/slack-desktop }
       - { name: teams, src: https://aur.archlinux.org/teams.git, dest: ~/.setup/aur/teams }
@@ -231,7 +231,7 @@
         - zsh
         - dotfile
 
-    - name: git clone all repositories root
+    - name: Git clone all repositories root
       become: 'True'
       git:
         repo: "{{ item.src }}"
@@ -239,6 +239,61 @@
         force: 'True'
       with_items: "{{ repos_git_root }}"
       tags:
+        - k8s
+        - dotfile
+
+    - name: Create folder for Lens
+      become: 'True'
+      file:
+        dest: /opt/Lens/
+        force: 'True'
+        state: directory
+        owner: root
+        group: root
+      tags:
+        - pacman
+        - k8s
+        - dotfile
+
+    - name: Download application Lens k8s
+      become: 'True'
+      get_url:
+        url: https://api.k8slens.dev/binaries/Lens-5.0.0-latest.20210629.3.x86_64.AppImage
+        dest: /opt/Lens/Lens.AppImage
+        mode: '0755'
+        owner: root
+        group: root
+      tags:
+        - pacman
+        - k8s
+        - dotfile
+    
+    - name: Create the executable from the launcher
+      copy:
+        dest: ~/.local/share/applications/lens.desktop
+        content: |
+          [Desktop Entry]
+          Name=Lens
+          Exec=/opt/Lens/Lens.AppImage %U
+          Terminal=false
+          Type=Application
+          Icon={{ local_home }}/Pictures/logo/lens-logo-icon.svg
+          StartupWMClass=Lens
+          Comment=Lens - The Kubernetes IDE
+          MimeType=x-scheme-handler/lens;
+          Categories=Network;
+        mode: '0755'
+        owner: "{{ lookup('env','USER') }}"
+        group: "{{ lookup('env','USER') }}"
+      tags:
+        - pacman
+        - k8s
+        - dotfile
+
+    - name: Add application in launcher
+      shell: xdg-settings set default-url-scheme-handler lens lens.desktop
+      tags:
+        - pacman
         - k8s
         - dotfile
 
