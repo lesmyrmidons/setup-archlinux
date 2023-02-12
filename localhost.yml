@@ -134,9 +134,9 @@
       - { src: ~/.setup/zsh_config/zshrc, dest: ~/.zshrc }
       - { src: ~/.setup/zsh_config/zsh_aliases, dest: ~/.zsh_aliases }
       - { src: ~/.setup/zsh_config/zsh_plugins.txt, dest: ~/.zsh_plugins.txt }
-      - { src: /opt/kubectx/completion/kubectx.zsh, dest: /home/lesmyrmidons/.cache/antidote/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh/completions/_kubectx.zsh }
-      - { src: /opt/kubectx/completion/kubens.zsh, dest: /home/lesmyrmidons/.cache/antidote/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh/completions/_kubens.zsh }
-      - { src: ~/.setup/dotfile/logos, dest: ~/Picture/logos }
+      - { src: /opt/kubectx/completion/kubectx.zsh, dest: /home/lesmyrmidons/.cache/antidote/https-COLON--SLASH--SLASH-github.com-SLASH-ohmyzsh-SLASH-ohmyzsh/cache/completions/_kubectx.zsh }
+      - { src: /opt/kubectx/completion/kubens.zsh, dest: /home/lesmyrmidons/.cache/antidote/https-COLON--SLASH--SLASH-github.com-SLASH-ohmyzsh-SLASH-ohmyzsh/cache/completions/_kubens.zsh }
+      - { src: ~/.setup/dotfile/logos, dest: ~/Pictures/logos }
 
     directories:
       - { src: "{{ local_home }}/.fonts" }
