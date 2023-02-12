@@ -14,18 +14,19 @@
       - { src: "https://github.com/ahmetb/kubectx", dest: "/opt/kubectx"}
 
     aur_packages:
-      - { name: antibody, src: https://aur.archlinux.org/antibody.git, dest: ~/.setup/aur/antibody }
-      - { name: cnijfilter2-mg7700, src: https://aur.archlinux.org/cnijfilter2-mg7700.git, dest: ~/.setup/aur/cnijfilter2-mg7700 }
-      - { name: dive, src: https://aur.archlinux.org/dive.git, dest: ~/.setup/aur/dive }
-      - { name: google-chrome, src: https://aur.archlinux.org/google-chrome.git, dest: ~/.setup/aur/google-chrome }
-      - { name: google-cloud-sdk, src: https://aur.archlinux.org/google-cloud-sdk.git, dest: ~/.setup/aur/google-cloud-sdk }
-      - { name: gotask-taskfile, src: https://aur.archlinux.org/gotask-taskfile.git, dest: ~/.setup/aur/gotask-taskfile }
-      - { name: jetbrains-toolbox, src: https://aur.archlinux.org/jetbrains-toolbox.git, dest: ~/.setup/aur/jetbrains-toolbox }
-      - { name: joplin, src: https://aur.archlinux.org/joplin.git, dest: ~/.setup/aur/joplin }
-      - { name: scangearmp2-mg7700, src: https://aur.archlinux.org/scangearmp2-mg7700.git, dest: ~/.setup/aur/scangearmp2-mg7700 }
-      - { name: slack-desktop, src: https://aur.archlinux.org/slack-desktop.git, dest: ~/.setup/aur/slack-desktop }
-      - { name: teams, src: https://aur.archlinux.org/teams.git, dest: ~/.setup/aur/teams }
-      - { name: virtualbox-ext-oracle, src: https://aur.archlinux.org/virtualbox-ext-oracle.git, dest: ~/.setup/aur/virtualbox-ext-oracle}
+      - cnijfilter2-mg7700
+      - dive
+      - google-chrome
+      - gotask-taskfile
+      - scangearmp2-mg7700
+      - teams
+      - ulauncher
+      - topgrade
+
+    app_image:
+      - { name: Lens, src: https://api.k8slens.dev/binaries/latest.x86_64.AppImage, desc: "Lens - The Kubernetes IDE", category: Network }
+      - { name: Joplin, src: https://github.com/laurent22/joplin/releases/download/v2.9.17/Joplin-2.9.17.AppImage, desc: "Joplin - Note taking and to-do application", category: Office }
+      - { name: CPU-X, src: https://github.com/TheTumultuousUnicornOfDarkness/CPU-X/releases/download/v4.5.2/CPU-X-v4.5.2-x86_64.AppImage, desc: "CPU-X - Gathers information on CPU, motherboard and more", category: "System Tools" }
 
     pacman_packages:
       - { name: ack }
@@ -33,7 +34,6 @@
       - { name: bash-completion }
       - { name: caprine }
       - { name: code }
-      - { name: chrome-gnome-shell }
       - { name: curl }
       - { name: docker }
       - { name: fuse }
@@ -42,12 +42,12 @@
       - { name: helm }
       - { name: htop }
       - { name: httpie }
-      - { name: hardinfo }
+      - { name: hwinfo }
       - { name: i2c-tools }
       - { name: krita }
       - { name: krita-plugin-gmic }
       - { name: kubectl }
-      - { name: kubectx }
+#      - { name: kubectx }
       - { name: nvm }
       - { name: nvme-cli }
       - { name: obs-studio }
@@ -56,61 +56,69 @@
       - { name: screenfetch }
       - { name: signal-desktop }
       - { name: slack-web-jak, state: absent }
+      - { name: snapd }
       - { name: solaar }
-      - { name: steam-manjaro }
+      - { name: steam }
       - { name: terminator }
       - { name: tig }
       - { name: timeshift }
-      - { name: timew } # timewarrior
+#      - { name: timew } # timewarrior
       - { name: tmux }
       - { name: tree }
-      - { name: ulauncher }
       - { name: vagrant }
       - { name: vim }
       - { name: virtualbox }
-      - { name: virtualbox-guest-iso }
-      - { name: virtualbox-host-dkms }
-      - { name: linux510-virtualbox-host-modules }
-      - { name: whatsapp-web-jak }
+#      - { name: virtualbox-guest-iso }
+#      - { name: virtualbox-host-dkms }
+#      - { name: linux510-virtualbox-host-modules }
       - { name: yarn }
       - { name: zsh }
       - { name: bitwarden }
-      - { name: brave }
       - { name: discord }
       - { name: ledger-live-bin }
       - { name: vlc }
 
-    # flatpak_packages:
-    #   # monitoring Nvidia
+    flatpak_remotes:
+      - { name: flathub, url: https://dl.flathub.org/repo/flathub.flatpakrepo }
+
+    flatpak_packages:
+      # monitoring Nvidia
     #   - { name: com.leinardi.gwe, state: absent }
-    #   - { name: com.googleplaymusicdesktopplayer.GPMDP, state: absent }
     #   - { name: org.gtk.Gtk3theme.Yaru-remix, state: absent }
     #   - { name: org.gtk.Gtk3theme.Yaru-remix-dark, state: absent }
     #   - { name: org.gtk.Gtk3theme.Yaru-remix-light, state: absent }
     #   - { name: com.discordapp.Discord }
+      - { name: org.flameshot.Flameshot }
+      - { name: com.github.iwalton3.jellyfin-media-player }
+      - { name: io.github.jorchube.monitorets }
+      - { name: com.hunterwittenborn.Celeste }
+
+    snap_packages:
+      - { name: slack, classic: False }
+      - { name: postman, classic: False }
 
     pip_packages:
       - { name: thefuck }
       # Pygments for zsh-syntax-highlighting
       - { name: Pygments }
 
-    composer_packages:
-      - { name: "hirak/prestissimo" }
-      - { name: "psy/psysh" }
+#    composer_packages:
+#      - { name: "hirak/prestissimo" }
+#      - { name: "psy/psysh" }
 
     npm_packages:
-      - { name: "@angular/cli" }
-      - { name: bower }
-      - { name: coffee-script }
-      - { name: hubot }
-      - { name: karma }
-      - { name: "@vue/cli" }
+#      - { name: "@angular/cli" }
+#      - { name: bower }
+#      - { name: coffee-script }
+#      - { name: hubot }
+#      - { name: karma }
+#      - { name: "@vue/cli" }
       - { name: localtunnel }
-      - { name: n }
-      - { name: nativefier }
-      - { name: npm-check-updates }
-      - { name: typescript }
-      - { name: typings }
+#      - { name: n }
+#      - { name: nativefier }
+#      - { name: npm-check-updates }
+#      - { name: typescript }
+#      - { name: typings }
 
     fonts_url:
       - { url: https://github.com/romkatv/dotfiles-public/raw/master/.local/share/fonts/NerdFonts/MesloLGS%20NF%20Regular.ttf }
@@ -126,12 +134,13 @@
       - { src: ~/.setup/zsh_config/zshrc, dest: ~/.zshrc }
       - { src: ~/.setup/zsh_config/zsh_aliases, dest: ~/.zsh_aliases }
       - { src: ~/.setup/zsh_config/zsh_plugins.txt, dest: ~/.zsh_plugins.txt }
-      - { src: /opt/kubectx/completion/kubectx.zsh, dest: /home/lesmyrmidons/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh/completions/_kubectx.zsh }
-      - { src: /opt/kubectx/completion/kubens.zsh, dest: /home/lesmyrmidons/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh/completions/_kubens.zsh }
+      - { src: /opt/kubectx/completion/kubectx.zsh, dest: /home/lesmyrmidons/.cache/antidote/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh/completions/_kubectx.zsh }
+      - { src: /opt/kubectx/completion/kubens.zsh, dest: /home/lesmyrmidons/.cache/antidote/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh/completions/_kubens.zsh }
+      - { src: ~/.setup/dotfile/logos, dest: ~/Picture/logos }
 
     directories:
       - { src: "{{ local_home }}/.fonts" }
-      - { src: "{{ local_home }}/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh/completions" }
+      - { src: "{{ local_home }}/.cache/antidote/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh/completions" }
       - { src: "{{ local_home }}/.kube" }
 
   handlers:
@@ -140,6 +149,12 @@
     - name: sensors
       become: 'True'
       shell: sensors-detect --auto
+    - name: snap
+      become: 'True'
+      shell: systemctl enable --now snapd.socket
+
+  roles:
+    - { role: jahrik.yay, install: true }
 
   tasks:
     - name: Update repositories ArchLinux
@@ -149,6 +164,7 @@
         upgrade: 'True'
       tags:
         - pacman
+        - apps
         - dotfile
 
     - name: Install packages ArchLinux
@@ -158,40 +174,50 @@
         state: "{{ item.state|default('present') }}"
       with_items: "{{ pacman_packages }}"
       ignore_errors: 'True'
-      notify: sensors
+      notify:
+        - sensors
+        - snap
       tags:
         - pacman
+        - apps
         - dotfile
 
-    - name: Download package AUR
-      git:
-        repo: "{{ item.src }}"
-        dest: "{{ item.dest }}"
-        force: 'True'
-        update: 'True'
-        recursive: 'False'
-        track_submodules: 'False'
-      with_items: "{{ aur_packages }}"
+    # snap store install
+    - name: Install snap packages
+      become: 'True'
+      community.general.snap:
+        name: "{{ item.name }}"
+        channel: "{{ item.channel|default('latest/stable') }}"
+        classic: "{{ item.classic|default('True') }}"
+        state: "{{ item.state|default('present') }}"
+      with_items: "{{ snap_packages }}"
+      ignore_errors: 'True'
       tags:
-        - aur
-        - dotfile
-    
-    - name: Build packages AUR
-      shell: |
-        cd {{ local_home }}/.setup/aur/{{ item.name }}
-        makepkg -sic --needed --noconfirm
-      with_items: "{{ aur_packages }}"
-      tags:
-        - aur
-        - dotfile
+        - snap
+        - apps
 
-    - name: Remove packages list
-      file:
-        path: "{{ local_home }}/.setup/aur"
-        state: absent
+    # Flatpak store install
+    - name: Add flatpak remote
+      community.general.flatpak_remote:
+        name: "{{ item.name }}"
+        state: "{{ item.state|default('present') }}"
+        flatpakrepo_url: "{{ item.url }}"
+        method: user
+      with_items: "{{ flatpak_remotes }}"
       tags:
-        - aur
-        - dotfile
+        - flatpak
+        - apps
+
+    - name: Install flatpak packages
+      community.general.flatpak:
+        name: "{{ item.name }}"
+        state: "{{ item.state|default('present') }}"
+        remote: "{{ item.remote|default('flathub') }}"
+        method: user
+      with_items: "{{ flatpak_packages }}"
+      tags:
+        - flatpak
+        - apps
 
     # configure zsh
     - name: Change default shell for {{ lookup('env','USER') }}
@@ -242,60 +268,9 @@
         - k8s
         - dotfile
 
-    - name: Create folder for Lens
-      become: 'True'
-      file:
-        dest: /opt/Lens/
-        force: 'True'
-        state: directory
-        owner: root
-        group: root
-      tags:
-        - pacman
-        - k8s
-        - dotfile
-
-    - name: Download application Lens k8s
-      become: 'True'
-      get_url:
-        url: https://api.k8slens.dev/binaries/Lens-5.0.0-latest.20210629.3.x86_64.AppImage
-        dest: /opt/Lens/Lens.AppImage
-        mode: '0755'
-        owner: root
-        group: root
-      tags:
-        - pacman
-        - k8s
-        - dotfile
-    
-    - name: Create the executable from the launcher
-      copy:
-        dest: ~/.local/share/applications/lens.desktop
-        content: |
-          [Desktop Entry]
-          Name=Lens
-          Exec=/opt/Lens/Lens.AppImage %U
-          Terminal=false
-          Type=Application
-          Icon={{ local_home }}/Pictures/logo/lens-logo-icon.svg
-          StartupWMClass=Lens
-          Comment=Lens - The Kubernetes IDE
-          MimeType=x-scheme-handler/lens;
-          Categories=Network;
-        mode: '0755'
-        owner: "{{ lookup('env','USER') }}"
-        group: "{{ lookup('env','USER') }}"
-      tags:
-        - pacman
-        - k8s
-        - dotfile
-
-    - name: Add application in launcher
-      shell: xdg-settings set default-url-scheme-handler lens lens.desktop
-      tags:
-        - pacman
-        - k8s
-        - dotfile
+    - name: Install all application of type AppImage
+      include_tasks: app_image.yml
+      loop: "{{ app_image }}"
 
     - name: Install apps Python
       pip:
@@ -313,13 +288,6 @@
         force: 'True'
         state: link
       with_items: "{{ link_user }}"
-      tags:
-        - zsh
-        - dotfile
-
-    - name: load antibody
-      shell: antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.sh
-      when: running_processes_ab.changed
       tags:
         - zsh
         - dotfile

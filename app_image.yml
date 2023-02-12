@@ -1,0 +1,55 @@
+---
+- name: Create folder for "{{ item.name }}"
+  become: 'True'
+  file:
+    dest: /opt/{{ item.name }}/
+    force: 'True'
+    state: directory
+    owner: root
+    group: root
+  tags:
+    - appImage
+    - apps
+    - dotfile
+
+- name: Download application {{ item.name }}
+  become: 'True'
+  get_url:
+    url: "{{ item.src }}"
+    dest: /opt/{{ item.name }}/{{ item.name }}.AppImage
+    mode: '0755'
+    owner: root
+    group: root
+  tags:
+    - appImage
+    - apps
+    - dotfile
+
+- name: Create the executable from the launcher
+  copy:
+    dest: ~/.local/share/applications/{{ item.name|lower }}.desktop
+    content: |
+      [Desktop Entry]
+      Name={{ item.name }}
+      Exec=/opt/{{ item.name }}/{{ item.name }}.AppImage %U
+      Terminal=false
+      Type=Application
+      Icon={{ local_home }}/Pictures/logos/{{ item.name|lower }}-logo-icon.svg
+      StartupWMClass=Lens
+      Comment={{ item.desc }}
+      MimeType=x-scheme-handler/{{ item.name|lower }};
+      Categories={{ item.category }};
+    mode: '0755'
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+  tags:
+    - appImage
+    - apps
+    - dotfile
+
+- name: Add application in launcher
+  shell: xdg-settings set default-url-scheme-handler {{ item.name|lower }} {{ item.name|lower }}.desktop
+  tags:
+    - appImage
+    - apps
+    - dotfile
