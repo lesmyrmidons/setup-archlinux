@@ -8,7 +8,7 @@
     repos_git_user:
       - { src: "https://github.com/lesmyrmidons/dotfiles.git", dest: "~/.setup/dotfile" }
       - { src: "https://github.com/lesmyrmidons/zsh-config.git", dest: "~/.setup/zsh_config" }
-      # - { src: "https://github.com/lesmyrmidons/vim-config.git", dest: "~/.setup/vim_config" }
+      - { src: "https://github.com/lesmyrmidons/vim-config.git", dest: "~/.setup/vim_config" }
 
     repos_git_root:
       - { src: "https://github.com/ahmetb/kubectx", dest: "/opt/kubectx"}
@@ -17,7 +17,6 @@
       - cnijfilter2-mg7700
       - dive
       - google-chrome
-      - gotask-taskfile
       - scangearmp2-mg7700
       - teams
       - ulauncher
@@ -25,19 +24,20 @@
 
     app_image:
       - { name: Lens, src: https://api.k8slens.dev/binaries/latest.x86_64.AppImage, desc: "Lens - The Kubernetes IDE", category: Network }
-      - { name: Joplin, src: https://github.com/laurent22/joplin/releases/download/v2.9.17/Joplin-2.9.17.AppImage, desc: "Joplin - Note taking and to-do application", category: Office }
-      - { name: CPU-X, src: https://github.com/TheTumultuousUnicornOfDarkness/CPU-X/releases/download/v4.5.2/CPU-X-v4.5.2-x86_64.AppImage, desc: "CPU-X - Gathers information on CPU, motherboard and more", category: "System Tools" }
+      - { name: Joplin, src: https://objects.joplinusercontent.com/v3.5.12/Joplin-3.5.12.AppImage?source=JoplinWebsite&type=New, desc: "Joplin - Note taking and to-do application", category: "Office" }
+      - { name: CPU-X, src: https://github.com/TheTumultuousUnicornOfDarkness/CPU-X/releases/download/v5.4.0/CPU-X-5.4.0-x86_64.AppImage, desc: "CPU-X - Gathers information on CPU, motherboard and more", category: "System Tools" }
+      - { name: Ledger, src: https://github.com/TheAssassin/AppImageLauncher/releases/download/v3.0.0-beta-3/appimagelauncher-lite-3.0.0-beta-2-gha287-x86_64.AppImage, desc: "Ledger live desktop", category: "Bank" }
 
     pacman_packages:
-      - { name: ack }
       - { name: antiword }
       - { name: bash-completion }
-      - { name: caprine }
+      - { name: bitwarden }
       - { name: code }
       - { name: curl }
       - { name: docker }
       - { name: fuse }
       - { name: git }
+      - { name: go-task }
       - { name: hddtemp }
       - { name: helm }
       - { name: htop }
@@ -47,78 +47,48 @@
       - { name: krita }
       - { name: krita-plugin-gmic }
       - { name: kubectl }
-#      - { name: kubectx }
       - { name: nvm }
       - { name: nvme-cli }
       - { name: obs-studio }
-      - { name: pinta }
       - { name: pwgen }
       - { name: screenfetch }
-      - { name: signal-desktop }
-      - { name: slack-web-jak, state: absent }
-      - { name: snapd }
       - { name: solaar }
       - { name: steam }
+      - { name: tailspin }
       - { name: terminator }
       - { name: tig }
       - { name: timeshift }
-#      - { name: timew } # timewarrior
       - { name: tmux }
       - { name: tree }
-      - { name: vagrant }
       - { name: vim }
-      - { name: virtualbox }
-#      - { name: virtualbox-guest-iso }
-#      - { name: virtualbox-host-dkms }
-#      - { name: linux510-virtualbox-host-modules }
       - { name: yarn }
       - { name: zsh }
-      - { name: bitwarden }
-      - { name: discord }
-      - { name: ledger-live-bin }
       - { name: vlc }
 
     flatpak_remotes:
       - { name: flathub, url: https://dl.flathub.org/repo/flathub.flatpakrepo }
 
     flatpak_packages:
-      # monitoring Nvidia
-    #   - { name: com.leinardi.gwe, state: absent }
-    #   - { name: org.gtk.Gtk3theme.Yaru-remix, state: absent }
-    #   - { name: org.gtk.Gtk3theme.Yaru-remix-dark, state: absent }
-    #   - { name: org.gtk.Gtk3theme.Yaru-remix-light, state: absent }
-    #   - { name: com.discordapp.Discord }
+      - { name: com.discordapp.Discord }
       - { name: org.flameshot.Flameshot }
-      - { name: com.github.iwalton3.jellyfin-media-player }
+      - { name: org.jellyfin.JellyfinDesktop }
       - { name: io.github.jorchube.monitorets }
       - { name: com.hunterwittenborn.Celeste }
-
-    snap_packages:
-      - { name: slack, classic: False }
-      - { name: postman, classic: False }
+      - { name: com.visualstudio.code }
+      - { name: org.telegram.desktop }
+      - { name: re.sonny.OhMySVG }
+      - { name: io.missioncenter.MissionCenter }
+      - { name: io.gitlab.librewolf-community }
+      - { name: com.prusa3d.PrusaSlicer }
+      - { name: org.signal.Signal }
+      - { name: org.ferdium.Ferdium }
+      - { name: com.github.PintaProject.Pinta }
 
     pip_packages:
       - { name: thefuck }
       # Pygments for zsh-syntax-highlighting
       - { name: Pygments }
-
-#    composer_packages:
-#      - { name: "hirak/prestissimo" }
-#      - { name: "psy/psysh" }
-
-    npm_packages:
-#      - { name: "@angular/cli" }
-#      - { name: bower }
-#      - { name: coffee-script }
-#      - { name: hubot }
-#      - { name: karma }
-#      - { name: "@vue/cli" }
-      - { name: localtunnel }
-#      - { name: n }
-#      - { name: nativefier }
-#      - { name: npm-check-updates }
-#      - { name: typescript }
-#      - { name: typings }
+#      - { name:  }
 
     fonts_url:
       - { url: https://github.com/romkatv/dotfiles-public/raw/master/.local/share/fonts/NerdFonts/MesloLGS%20NF%20Regular.ttf }
@@ -153,9 +123,6 @@
       become: 'True'
       shell: systemctl enable --now snapd.socket
 
-  roles:
-    - { role: jahrik.yay, install: true }
-
   tasks:
     - name: Update repositories ArchLinux
       become: 'True'
@@ -176,25 +143,32 @@
       ignore_errors: 'True'
       notify:
         - sensors
-        - snap
       tags:
         - pacman
         - apps
         - dotfile
-
-    # snap store install
-    - name: Install snap packages
-      become: 'True'
-      community.general.snap:
-        name: "{{ item.name }}"
-        channel: "{{ item.channel|default('latest/stable') }}"
-        classic: "{{ item.classic|default('True') }}"
-        state: "{{ item.state|default('present') }}"
-      with_items: "{{ snap_packages }}"
-      ignore_errors: 'True'
+    
+    - name: Check if UV is installed
+      ansible.builtin.stat:
+        path: "/home/lesmyrmidons/.local/bin/uv"
+      register: uv_stat
       tags:
-        - snap
-        - apps
+        - uv
+        - python
+        - dotfile
+
+    - block:
+      - name: Install UV
+        ansible.builtin.shell: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+
+      when: not uv_stat.stat.exists
+      environment:
+        PATH: "/home/lesmyrmidons/.local/bin:{{ ansible_env.PATH }}"
+      tags:
+        - uv
+        - python
+        - dotfile
 
     # Flatpak store install
     - name: Add flatpak remote
@@ -231,18 +205,6 @@
         - zsh
         - dotfile
 
-    - name: Install kubeseal
-      become: 'True'
-      get_url:
-        url: https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.16.0/kubeseal-linux-amd64
-        dest: /usr/local/bin/kubeseal
-        mode: '0755'
-        owner: root
-        group: root
-      tags:
-        - k8s
-        - dotfile
-
     # install repositories github
     - name: git clone all repositories user
       git:
@@ -273,12 +235,12 @@
       loop: "{{ app_image }}"
 
     - name: Install apps Python
-      pip:
-        name: "{{ item.name }}"
-        state: "{{ item.state|default('present') }}"
+      ansible.builtin.shell: |
+        uv tool install "{{ item.name }}"
       with_items: "{{ pip_packages }}"
       tags:
         - zsh
+        - python
         - dotfile
 
     - name: Create Symlink for git
@@ -315,4 +277,24 @@
       notify: run fc-cache
       tags:
         - zsh
+        - dotfile
+
+    - name: Check if Homebrew is installed
+      ansible.builtin.stat:
+        path: "/home/linuxbrew/.linuxbrew/bin/brew"
+      register: brew_stat
+      tags:
+        - brew
+        - dotfile
+
+    - block:
+      - name: Install Homebrew
+        ansible.builtin.shell: |
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+      when: not brew_stat.stat.exists
+      environment:
+        PATH: "/home/linuxbrew/.linuxbrew/bin:{{ ansible_env.PATH }}"
+      tags:
+        - brew
         - dotfile

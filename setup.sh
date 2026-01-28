@@ -22,15 +22,17 @@ do
     esac
 done
 
-which -a ansible
+which -a uv
 if [[ $? != 0 ]] ; then
+    echo "Install uv"
+    curl -LsSf https://astral.sh/uv/install.sh | sh
     echo "Install ansible"
-    python3 -m pip install --user ansible
+    uv sync
 fi
 
 if $install; then
-    ansible-galaxy collection install -r requirements.yml
-    ansible-galaxy role install -r requirements.yml
-    ansible-playbook -i inventory localhost.yml -K
+    uv run ansible-galaxy collection install -r requirements.yml
+    uv run ansible-galaxy role install -r requirements.yml
+    uv run ansible-playbook -i inventory localhost.yml -K
 fi
 
