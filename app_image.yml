@@ -31,11 +31,11 @@
     content: |
       [Desktop Entry]
       Name={{ item.name }}
-      Exec=/opt/{{ item.name }}/{{ item.name }}.AppImage %U
+      Exec=/opt/{{ item.name }}/{{ item.name }}.AppImage{{ item.options|default(' %U') }}
       Terminal=false
       Type=Application
       Icon={{ local_home }}/Pictures/logos/{{ item.name|lower }}-logo-icon.svg
-      StartupWMClass=Lens
+      StartupWMClass={{ item.name }}
       Comment={{ item.desc }}
       MimeType=x-scheme-handler/{{ item.name|lower }};
       Categories={{ item.category }};

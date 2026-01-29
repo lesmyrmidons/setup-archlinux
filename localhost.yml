@@ -26,7 +26,7 @@
       - { name: Lens, src: https://api.k8slens.dev/binaries/latest.x86_64.AppImage, desc: "Lens - The Kubernetes IDE", category: Network }
       - { name: Joplin, src: https://objects.joplinusercontent.com/v3.5.12/Joplin-3.5.12.AppImage?source=JoplinWebsite&type=New, desc: "Joplin - Note taking and to-do application", category: "Office" }
       - { name: CPU-X, src: https://github.com/TheTumultuousUnicornOfDarkness/CPU-X/releases/download/v5.4.0/CPU-X-5.4.0-x86_64.AppImage, desc: "CPU-X - Gathers information on CPU, motherboard and more", category: "System Tools" }
-      - { name: Ledger, src: https://github.com/TheAssassin/AppImageLauncher/releases/download/v3.0.0-beta-3/appimagelauncher-lite-3.0.0-beta-2-gha287-x86_64.AppImage, desc: "Ledger live desktop", category: "Bank" }
+      - { name: Ledger, src: https://download.live.ledger.com/latest/linux, desc: "Ledger wallet desktop", options: " --no-sandbox", category: "Bank" }
 
     pacman_packages:
       - { name: antiword }
@@ -39,7 +39,7 @@
       - { name: git }
       - { name: go-task }
       - { name: hddtemp }
-      - { name: helm }
+      - { name: helm, state: absent }
       - { name: htop }
       - { name: httpie }
       - { name: hwinfo }
@@ -88,7 +88,10 @@
       - { name: thefuck }
       # Pygments for zsh-syntax-highlighting
       - { name: Pygments }
-#      - { name:  }
+      - { name: topgrade }
+
+    brew_packages:
+      - { name: helm }
 
     fonts_url:
       - { url: https://github.com/romkatv/dotfiles-public/raw/master/.local/share/fonts/NerdFonts/MesloLGS%20NF%20Regular.ttf }
@@ -298,3 +301,13 @@
       tags:
         - brew
         - dotfile
+
+    - name: Install brew packages
+      community.general.homebrew:
+        name: "{{ item.name }}"
+        state: "{{ item.state|default('present') }}"
+        update_homebrew: true
+      with_items: "{{ brew_packages }}"
+      tags:
+        - brew
+        - apps
