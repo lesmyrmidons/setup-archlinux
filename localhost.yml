@@ -89,6 +89,7 @@
       # Pygments for zsh-syntax-highlighting
       - { name: Pygments }
       - { name: topgrade }
+      - { name: gitup }
 
     brew_packages:
       - { name: helm }
