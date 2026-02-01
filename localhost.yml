@@ -9,18 +9,14 @@
       - { src: "https://github.com/lesmyrmidons/dotfiles.git", dest: "~/.setup/dotfile" }
       - { src: "https://github.com/lesmyrmidons/zsh-config.git", dest: "~/.setup/zsh_config" }
       - { src: "https://github.com/lesmyrmidons/vim-config.git", dest: "~/.setup/vim_config" }
+      - { src: "https://aur.archlinux.org/ulauncher.git", dest: "~/.setup/ulauncher" }
 
     repos_git_root:
       - { src: "https://github.com/ahmetb/kubectx", dest: "/opt/kubectx"}
 
     aur_packages:
-      - cnijfilter2-mg7700
-      - dive
-      - google-chrome
-      - scangearmp2-mg7700
-      - teams
-      - ulauncher
-      - topgrade
+      - { name: dive }
+      - { name: google-chrome }
 
     app_image:
       - { name: Lens, src: https://api.k8slens.dev/binaries/latest.x86_64.AppImage, desc: "Lens - The Kubernetes IDE", category: Network }
@@ -62,6 +58,7 @@
       - { name: tree }
       - { name: vim }
       - { name: yarn }
+      - { name: yay }
       - { name: zsh }
       - { name: vlc }
 
@@ -86,7 +83,6 @@
 
     pip_packages:
       - { name: thefuck }
-      # Pygments for zsh-syntax-highlighting
       - { name: Pygments }
       - { name: topgrade }
       - { name: gitup }
@@ -123,9 +119,6 @@
     - name: sensors
       become: 'True'
       shell: sensors-detect --auto
-    - name: snap
-      become: 'True'
-      shell: systemctl enable --now snapd.socket
 
   tasks:
     - name: Update repositories ArchLinux
@@ -151,7 +144,21 @@
         - pacman
         - apps
         - dotfile
-    
+
+    - name: Install packages AUR ArchLinux
+      become: 'True'
+      community.general.pacman:
+        name: "{{ item.name }}"
+        state: "{{ item.state|default('present') }}"
+        executable: yay
+#        extra_args: --builddir /var/cache/yay
+      with_items: "{{ aur_packages }}"
+      ignore_errors: 'True'
+      tags:
+        - pacman
+        - apps
+        - dotfile
+
     - name: Check if UV is installed
       ansible.builtin.stat:
         path: "/home/lesmyrmidons/.local/bin/uv"
@@ -245,6 +252,14 @@
       tags:
         - zsh
         - python
+        - dotfile
+
+    - name: Install ulauncher
+      become: 'True'
+      ansible.builtin.shell: |
+        cd ~/.setup/ulauncher && makepkg -is
+      tags:
+        - zsh
         - dotfile
 
     - name: Create Symlink for git
