@@ -86,6 +86,7 @@
       - { name: Pygments }
       - { name: topgrade }
       - { name: gitup }
+      - { name: go-task-bin }
 
     brew_packages:
       - { name: helm }
@@ -254,13 +255,22 @@
         - python
         - dotfile
 
-    - name: Install ulauncher
-      become: 'True'
-      ansible.builtin.shell: |
-        cd ~/.setup/ulauncher && makepkg -is
+    - name: Check if Ulauncher is installed
+      ansible.builtin.stat:
+        path: "/usr/bin/ulauncher"
+      register: uv_stat
       tags:
-        - zsh
-        - dotfile
+        - apps
+
+    - block:
+      - name: Install ulauncher
+        ansible.builtin.shell: |
+          cd ~/.setup/ulauncher && makepkg -is
+        tags:
+          - apps
+      when: not uv_stat.stat.exists
+      tags:
+        - apps
 
     - name: Create Symlink for git
       file:
