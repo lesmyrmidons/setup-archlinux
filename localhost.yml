@@ -258,7 +258,7 @@
     - name: Check if Ulauncher is installed
       ansible.builtin.stat:
         path: "/usr/bin/ulauncher"
-      register: uv_stat
+      register: ulauncher_stat
       tags:
         - apps
 
@@ -268,7 +268,7 @@
           cd ~/.setup/ulauncher && makepkg -is
         tags:
           - apps
-      when: not uv_stat.stat.exists
+      when: not ulauncher_stat.stat.exists
       tags:
         - apps
 
