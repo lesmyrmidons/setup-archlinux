@@ -20,7 +20,7 @@
 
     app_image:
       - { name: Lens, src: https://api.k8slens.dev/binaries/latest.x86_64.AppImage, desc: "Lens - The Kubernetes IDE", category: Network }
-      - { name: Joplin, src: https://objects.joplinusercontent.com/v3.5.12/Joplin-3.5.12.AppImage?source=JoplinWebsite&type=New, desc: "Joplin - Note taking and to-do application", category: "Office" }
+#      - { name: Joplin, src: https://objects.joplinusercontent.com/v3.5.12/Joplin-3.5.12.AppImage?source=JoplinWebsite&type=New, desc: "Joplin - Note taking and to-do application", category: "Office" }
       - { name: CPU-X, src: https://github.com/TheTumultuousUnicornOfDarkness/CPU-X/releases/download/v5.4.0/CPU-X-5.4.0-x86_64.AppImage, desc: "CPU-X - Gathers information on CPU, motherboard and more", category: "System Tools" }
       - { name: Ledger, src: https://download.live.ledger.com/latest/linux, desc: "Ledger wallet desktop", options: " --no-sandbox", category: "Bank" }
 
@@ -80,6 +80,7 @@
       - { name: org.signal.Signal }
       - { name: org.ferdium.Ferdium }
       - { name: com.github.PintaProject.Pinta }
+      - { name: net.cozic.joplin_desktop }
 
     pip_packages:
       - { name: thefuck }
